@@ -6,7 +6,7 @@ gem 'rails', '4.0.0'
 # Use postgresql as the database for Active Record
 gem 'pg'
 
-#gem 'versionist'
+gem 'versionist'
 
 # Authentication
 gem 'devise'

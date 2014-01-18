@@ -5,6 +5,10 @@ application up and running.
 
 Things you may want to cover:
 
+* rails generate versionist:new_api_version v1 Api::V1 --path=value:api/v1
+
+* rails generate versionist:new_controller streams Api::V1
+
 * Ruby version
 
 * System dependencies
