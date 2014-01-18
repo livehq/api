@@ -7,10 +7,10 @@ gem 'rails', '4.0.0'
 gem 'pg'
 
 #gem 'versionist'
-#
-## Authentication
-#gem 'devise'
-#
+
+# Authentication
+gem 'devise'
+
 ## Authorization
 #gem 'cancan'
 #
