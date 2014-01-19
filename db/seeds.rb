@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+User.where(id: 1).first_or_create!{|u|
+  #u.name = ENV['DEFAULT_ADMIN_USERNAME'].dup
+  u.id = 1
+  u.password = ENV['DEFAULT_ADMIN_PASSWORD'].dup
+  u.email = ENV['DEFAULT_ADMIN_EMAIL'].dup
+}

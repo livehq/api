@@ -6,10 +6,18 @@ gem 'rails', '4.0.0'
 # Use postgresql as the database for Active Record
 gem 'pg'
 
+# Environment variables
+gem 'dotenv-rails', :groups => [:development, :test]
+
+# Seed data
+gem 'seed-fu', github: 'mbleigh/seed-fu'
+
 gem 'versionist'
 
 # Authentication
 gem 'devise'
+
+gem 'omniauth-facebook'
 
 ## Authorization
 #gem 'cancan'
