@@ -17,6 +17,7 @@ gem 'versionist'
 # Authentication
 gem 'devise'
 
+gem 'omniauth'
 gem 'omniauth-facebook'
 
 ## Authorization
