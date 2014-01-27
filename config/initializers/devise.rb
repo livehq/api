@@ -220,8 +220,14 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
-  require "omniauth-facebook"
-  config.omniauth :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_APP_SECRET']
+  #require "omniauth-facebook"
+  #config.omniauth :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_APP_SECRET']
+
+
+  require 'omniauth-oauthio'
+  config.omniauth :oauthio, ENV['OAUTHIO_PUBLIC_KEY'], ENV['OAUTHIO_SECRET_KEY']
+
+  config.secret_key = 'fd8b99c4fb88f56b79ef1abcfae19a6feaad023eeed2b8907985e0c133dc01ad594cc75ec27c747aa33bfdd34f28fb98444570203e360280e78f4c31933c693c'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
@@ -245,4 +251,5 @@ Devise.setup do |config|
   # When using omniauth, Devise cannot automatically set Omniauth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = "/my_engine/users/auth"
+
 end

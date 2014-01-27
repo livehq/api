@@ -2,10 +2,11 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :token_authenticatable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
+         :omniauth_providers => [:oauthio, :facebook]
 
-  def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+  def self.find_for_oauthio_oauth(auth, signed_in_resource=nil)
     oauth_token = auth.credentials.token
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
 
@@ -13,7 +14,8 @@ class User < ActiveRecord::Base
       user.oauth_token = oauth_token
       user.save
     else
-      user = User.create(name: auth.extra.raw_info.name,
+      user = User.create(
+                          #name: auth.extra.raw_info.name,
                          provider: auth.provider,
                          uid: auth.uid,
                          email: auth.info.email,

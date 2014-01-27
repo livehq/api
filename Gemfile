@@ -18,7 +18,12 @@ gem 'versionist'
 gem 'devise'
 
 gem 'omniauth'
-gem 'omniauth-facebook'
+gem 'omniauth-oauthio', path: '/Users/jonathan/code/github.com/jgrowl/omniauth-oauthio'
+#gem 'omniauth-facebook'
+
+gem 'doorkeeper', '~> 0.7.0'
+
+gem 'rack-cors', :require => 'rack/cors'
 
 ## Authorization
 #gem 'cancan'
