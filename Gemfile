@@ -19,11 +19,11 @@ gem 'devise'
 
 gem 'omniauth'
 gem 'omniauth-oauthio', path: '/Users/jonathan/code/github.com/jgrowl/omniauth-oauthio'
-#gem 'omniauth-facebook'
 
-gem 'doorkeeper', '~> 0.7.0'
+#gem 'doorkeeper', '~> 0.7.0'
 
 gem 'rack-cors', :require => 'rack/cors'
+
 
 ## Authorization
 #gem 'cancan'
@@ -69,7 +69,20 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'sqlite3', group: [:development, :test]
+group :development do
+  gem 'meta_request'
+end
 
-gem 'rspec'
-gem 'rspec-rails'
+group :development, :test do
+  gem 'sqlite3'
+  #gem 'fakeredis', require: 'fakeredis/rspec'
+  gem 'faker'
+  gem 'factory_girl_rails'#, :require => false
+  gem 'rspec-rails', '~> 2.0'
+end
+
+
+#gem 'sqlite3', group: [:development, :test]
+#
+#gem 'rspec'
+#gem 'rspec-rails'

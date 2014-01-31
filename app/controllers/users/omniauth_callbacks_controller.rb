@@ -1,43 +1,24 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
-  #def oauthio
-  #  # You need to implement the method below in your model (e.g. app/models/user.rb)
-  #  @user = User.find_for_oauthio_oauth(auth_hash, current_user)
-  #  provider = auth_hash.provider
-  #
-  #  if @user.persisted?
-  #    sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
-  #    set_flash_message(:notice, :success, :kind => provider) if is_navigational_format?
-  #  else
-  #    session["devise.#{provider}_data"] = auth_hash
-  #    redirect_to new_user_registration_url
-  #  end
-  #end
-
   def oauthio
-    # You need to implement the method below in your model (e.g. app/models/user.rb)
-    @user = User.find_for_oauthio_oauth(auth_hash, current_user)
-    provider = auth_hash.provider
-
-    if @user.persisted?
-      sign_in @user
-      render json: {success: true}
+    @identity = Identity.find_or_create_with_omniauth(auth_hash)
+    if @identity.user.present?
+      # The identity we found had a user associated with it so let's
+      # just log them in here
+      render json: {success: true, message: 'Already signed in!', identities: @identity.user.identities}
     else
-      session["devise.#{provider}_data"] = auth_hash
-      #redirect_to new_user_registration_url
-      render json: {success: false, message: 'There was a problem adding user!'}
+      # No user associated with the identity so we need to create a new one
+      @user = User.create_for_oauthio_oauth(auth_hash, @identity)
+      if @user.persisted?
+        sign_in @user
+        render json: {success: true, message: 'New user created!', identities: @identity.user.identities }
+      else
+        render json: {success: false, message: 'There was a problem adding user!'}
+      end
     end
   end
 
   def auth_hash
     request.env['omniauth.auth']
   end
-
-  #def sign_in(resource_or_scope, *args)
-  #  options  = args.extract_options!
-  #  scope    = Devise::Mapping.find_scope!(resource_or_scope)
-  #  resource = args.last || resource_or_scope
-  #  sign_in(scope, resource, options)
-  #  #redirect_to after_sign_in_path_for(resource)
-  #end
 end

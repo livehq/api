@@ -1,16 +1,13 @@
 Api::Application.routes.draw do
 
-  use_doorkeeper
+  devise_for :users,
+             controllers: {omniauth_callbacks: 'users/omniauth_callbacks'}
+             #,token_authentication_key: 'authentication_key'
 
   api_version(:module => 'Api::V1', :path => {:value => 'api/v1'}, :defaults => {:format => :json}, :default => true) do
-    get '/me' => "credentials#me"
+    get '/aggregates/all' => 'aggregates#all'
+    get '/me' => 'credentials#me'
   end
-
-
-  devise_for :users,
-             :controllers => {:omniauth_callbacks => "users/omniauth_callbacks"},
-             :token_authentication_key => 'authentication_key'
-
 
   #devise_scope :user do
   #  get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
