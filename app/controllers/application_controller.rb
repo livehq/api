@@ -4,6 +4,13 @@ class ApplicationController < ActionController::Base
   #protect_from_forgery with: :exception
   protect_from_forgery with: :null_session
 
+  #load_and_authorize_resource
+  check_authorization
+
+  rescue_from CanCan::AccessDenied do |exception|
+    render json: {error: exception.message}
+  end
+
 
   def authenticate_user_from_token!
     email = params[:email].presence

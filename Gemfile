@@ -24,10 +24,10 @@ gem 'omniauth-oauthio', path: '/Users/jonathan/code/github.com/jgrowl/omniauth-o
 
 gem 'rack-cors', :require => 'rack/cors'
 
+# Authorization
+# canard includes cancan and role_model
+gem 'canard'
 
-## Authorization
-#gem 'cancan'
-#
 ## Websockets
 #gem 'websocket-rails'
 
